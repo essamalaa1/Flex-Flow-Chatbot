@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chatbot</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		function getBotResponse() {
+			var user_input = $("#user_input").val();
+			$("#conversation").append("<p>You: " + user_input + "</p>");
+			$.get("/get", { msg: user_input }).done(function(data) {
+				$("#conversation").append("<p>Bot: " + data + "</p>");
+			});
+			$("#user_input").val("");
+		}
+	</script>
+</head>
+<body>
+	<h1>Chatbot</h1>
+	<div id="conversation"></div>
+	<input id="user_input" type="text" placeholder="Enter message...">
+	<button onclick="getBotResponse()">Send</button>
+</body>
+</html>
